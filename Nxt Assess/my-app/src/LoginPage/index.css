@@ -1,0 +1,82 @@
+.error{
+    color:red;
+}
+.login-button{
+    width: 100%;
+    padding: 16px 16px;
+    background-color: #263868;
+    color: #FFFFFF;
+    margin-top:48px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+
+}
+.input-field{
+    width: 100%;
+    height: 40px;
+    border: 1px solid #D3D9E6;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color:#7E858E;
+}
+.input-label{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size:12px;
+    font-weight: 700;
+    color:#7E858E;
+    text-transform: uppercase;
+}
+
+
+.input-container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+.form-heading{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color:#263868;
+}
+
+.website-logo{
+    width: 77px;
+}
+
+.form-section{
+    background-color: #FAFBFE;
+}
+.form-main-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 32px;
+    min-height: 100vh;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    width: 486px;
+}
+.form-container{
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    padding: 48px;
+    box-shadow: 0px 4px 16px #7B879429;
+    background-color: #FFFFFF;
+}
