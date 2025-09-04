@@ -2,6 +2,8 @@ import React, { useState, useRef } from "react";
 import "./index.css";
 import axios from "axios";
 import Cookies from "js-cookie";
+import {useNavigate} from 'react-router-dom'
+
 
 export const LoginForm = () => {
   const nameInputRef = useRef(null);
@@ -9,9 +11,11 @@ export const LoginForm = () => {
   const [jwtToken, setJwtToken] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    setError(null)
 
     try {
       const username = nameInputRef.current.value;
@@ -23,10 +27,15 @@ export const LoginForm = () => {
       );
 
       setJwtToken(response.data.jwt_token);
-      Cookies.set("jwtToken", jwtToken);
-    } catch (error) {
-      setError(error.response.data.error_msg);
-     
+      Cookies.set("jwtToken", jwtToken, {
+        expires:30,
+        path:'/'
+      });
+     navigate("/", {replace:'true'})
+    } catch (err) {
+     const error = err?.response?.data?.error_msg || "Login failed!";
+      setError(error);
+     navigate('/', {replace:'true'})
     }
   };
 

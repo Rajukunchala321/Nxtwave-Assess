@@ -1,0 +1,39 @@
+
+
+
+.timer-submit-container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 41%;
+}
+.answer-container{
+    border-top: 1px solid #9797973F;
+    padding-top: 24px;
+    width: 100%;
+}
+.question-card{
+    width: 65%;
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    padding:48px;
+   
+}
+.assessment-main-container{
+    max-width: 1200px;
+    padding-top: 32px;
+    padding-bottom: 67px;
+    padding-right: 24px;
+    padding-left: 24px;
+    display: flex;
+    flex-direction: row;
+    gap:32px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 80svh;
+}
+.assessment-section{
+    background-color: #FAFBFE;
+    
+}
