@@ -34,7 +34,7 @@ export const Home = () => {
                 assessment
               </li>
             </ol>
-            <button>Start Assessment</button>
+            <a href="/assessment">Start Assessment</a>
          
           </div>
          <img src="../home-img.png" alt='' />

@@ -1,6 +1,25 @@
 
 
 
+
+.nxt-btn-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+.nxt-btn{
+    background-color: #164687;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 100%;
+    padding: 10px 19px;
+    cursor: pointer;
+}
 .timer-submit-container{
     display: flex;
     flex-direction: column;
@@ -17,6 +36,9 @@
     background-color: #FFFFFF;
     border-radius: 4px;
     padding:48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
    
 }
 .assessment-main-container{

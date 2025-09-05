@@ -9,7 +9,7 @@
     max-width: 568px;
 }
 
-.instructions-container>button{
+.instructions-container>a{
     background-color: #164687;
     padding: 8px 16px;
     border-radius: 4px;
@@ -19,6 +19,7 @@
     font-weight: 600;
     color: #FFFFFF;
     cursor: pointer;
+    text-decoration: none;
 
 }
 span{
