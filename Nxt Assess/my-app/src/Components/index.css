@@ -13,17 +13,18 @@
      color:#F8FAFC !important;
 }
 .option-img.selected  {
-    border:1px solid #263868;
+    border:2px solid #263868;
     border-radius: 4px;
 }
 
 .option-img{
     cursor: pointer;
+    width:100%;
 }
 
 
 .select{
-     width: 100%;
+  width: 100%;
   min-width: 30%;
   max-width: 50%;
   border: 1px solid var(--select-border);
