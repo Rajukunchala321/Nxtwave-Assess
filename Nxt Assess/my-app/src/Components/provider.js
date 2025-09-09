@@ -30,15 +30,14 @@ function reducerTwo(state, action) {
   switch (action.type) {
     case "GOTO_NXT_QUESTION":
       return { ...state, currentQuestion: action.index };
+
     case "ANSWER_QUESTION":
       return {
         ...state,
-        answered:{
-             ...state.answered,
-            [action.questionIndex]: action.optionIndex 
-
-        }
-        
+        answered: {
+          ...state.answered,
+          [action.questionIndex]: action.optionIndex,
+        },
       };
     default:
       return state;

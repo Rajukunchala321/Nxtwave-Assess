@@ -1,12 +1,12 @@
 
 
-.number-btn.submited{
+.question-num-container>div.submited{
     border: 1px solid #7C599F !important;
     background-color: #7C599F26 !important;
 }
-.number-btn.current{
-    border: 1px solid #60A5FA !important;
-    background-color: #EFF6FF !important;
+.question-num-container>div.current{
+    border: 1px solid #60A5FA ;
+    background-color: #EFF6FF ;
 }
 .default-option.selected  {
      background-color: #5B6F94 !important;
@@ -60,7 +60,7 @@
 
 }
 
-.number-btn{
+.question-num-container>div{
     display: flex;
     flex-direction: column;
     justify-content: center;
