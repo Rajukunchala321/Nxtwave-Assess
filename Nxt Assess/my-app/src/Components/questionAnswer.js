@@ -1,15 +1,19 @@
 import React, { useContext, useState } from "react";
 import "./index.css";
 import { Context } from "./provider";
-const QuestionAnswer = () => {
+const QuestionAnswer = ({hanleOptId}) => {
   const { apiState, state } = useContext(Context);
-  const [selectOption, setSelectOption] = useState(null)
-  console.log(apiState.data.questions);
-  // console.log(apiState.data)
+  const [selectOption, setSelectOption] = useState(null);
+  
   const questions = apiState.data.questions;
 
   const question = questions?.[state.currentQuestion];
-  console.log("state.currentQuestion", state.currentQuestion);
+
+  const handleSelectOpt = (id)=>{
+    setSelectOption(id);
+    hanleOptId(id)
+
+  }
 
   if (!question) {
     return <div>Loading pls wait....</div>;
@@ -27,8 +31,8 @@ const QuestionAnswer = () => {
                 key={idx}
                 id={option.id}
                 value={option.is_correct}
-                className={`default-option ${selectOption===idx ? "selected":""}`}
-                onClick={()=>setSelectOption(idx)} 
+                className={`default-option ${selectOption===option.id ? "selected":""}`}
+                onClick={()=>handleSelectOpt(option.id)} 
               >
                 {option.text}
               </div>
@@ -42,18 +46,18 @@ const QuestionAnswer = () => {
                 key={idx}
                 id={option.id}
                 value={option.is_correct}
-                className={`option-img ${selectOption ===idx ? "selected":"" }`}
+                className={`option-img ${selectOption ===option.id ? "selected":"" }`}
                 src={option.image_url}
                 alt={`option-img-${option.id}`}
-                onClick={()=>setSelectOption(idx)}
+                onClick={()=>handleSelectOpt(option.id)}
               />
             ))}
           </div>
         )}
         {question.options_type === "SINGLE_SELECT" && (
-          <select  className="select">
-            {question.options?.map((option, idx) => (
-              <option onClick={()=>setSelectOption(idx)}  key={option.id} value={option.is_correct}>
+          <select  onChange={(e) => handleSelectOpt(e.target.value)}   className="select">
+            {question.options?.map((option) => (
+              <option  key={option.id} value={option.is_correct}>
                 {option.text}
               </option>
             ))}
