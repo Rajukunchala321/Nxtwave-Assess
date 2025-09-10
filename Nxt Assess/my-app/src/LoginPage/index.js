@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./index.css";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -12,6 +12,10 @@ export const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(()=>{
+     nameInputRef.current.focus();
+  },[])
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();

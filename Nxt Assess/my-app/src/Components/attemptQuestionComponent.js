@@ -1,12 +1,22 @@
 import React, {useContext} from 'react';
-import {Context} from './provider'
+import {Context} from './provider';
+import { useNavigate } from 'react-router-dom';
 
 export const AttemptQuestionComponent = () => {
-  const {apiState, state, dispatchTwo}= useContext(Context);
+  const {apiState, state, dispatchTwo, handleSubmit}= useContext(Context);
   
+  const navigate = useNavigate()
   const answeredCount =  Object.keys(state.answered).length
     const handleCurrentBtn = (index)=>{
       dispatchTwo({type:"GOTO_NXT_QUESTION", index:index})
+    }
+
+    const submitAndNavigate = ()=>{
+      if(answeredCount>0){
+         navigate("/result", {replace:false})
+        handleSubmit()
+      }
+   
     }
   
   return (
@@ -34,7 +44,7 @@ export const AttemptQuestionComponent = () => {
               )}
           </div>
         </div>
-        <button className='submit-btn'>Submit Assessment</button>
+        <button onClick={submitAndNavigate} className='submit-btn'>Submit Assessment</button>
         </div>
     </div>
   )

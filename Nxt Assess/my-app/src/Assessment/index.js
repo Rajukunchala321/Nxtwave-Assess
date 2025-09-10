@@ -60,7 +60,7 @@ export const Assessment = () => {
           </div>
         </div>
         <div className="timer-submit-container">
-          <TimerComponent initalMinutes={5} initalSeconds={60} />
+          <TimerComponent  />
           <AttemptQuestionComponent />
         </div>
       </div>

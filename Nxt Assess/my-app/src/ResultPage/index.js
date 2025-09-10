@@ -1,23 +1,52 @@
-import React from 'react'
-import './index.css'
+import React, { useContext } from "react";
+import "./index.css";
+import { Context } from "../Components/provider";
 
 export const ResultPage = () => {
+  const { minutes, score, seconds } = useContext(Context);
   return (
-    <section className='result-section'>
-      <div className='result-main-container'>
-        <div className='result-continer'>
-          <img src='./resultSubmit.png' alt='result img' />
-          <div className='result-txt-container'>
-            <div className='cong-text'>Congrats! You completed the assessment.</div>
-            <div className='time-txt'>Time Taken:<span>00:09:39</span></div>
-            <div className='score-txt'>Your Score: <span>5</span></div>
-            <button className='reattempt-btn'>Reattempt</button>
-
-          </div>
-
+    <section className="result-section">
+      <div className="result-main-container">
+        <div className="result-continer">
+          {score > 0 ? (
+            <>
+              <img src="./resultSubmit.png" alt="result img" />
+              <div className="result-txt-container">
+                <div className="cong-text">
+                  Congrats! You completed the assessment.
+                </div>
+                <div className="time-txt">
+                  Time Taken:<span>00:{`${minutes}:${seconds}`}</span>
+                </div>
+                <div className="score-txt">
+                  Your Score: <span>{score}</span>
+                </div>
+                <a href="/" className="reattempt-btn">
+                  Reattempt
+                </a>
+              </div>
+            </>
+          ) : (
+            <>
+              <img src="./timeout-img.png" alt="result img" />
+              <div className="result-txt-container">
+                <div className="cong-text">
+                  Time is up
+                </div>
+                <div className="time-txt">
+                 You did not complete the assessment within the time.
+                </div>
+                <div className="score-txt">
+                  Your Score: <span>{score}</span>
+                </div>
+                <a href="/" className="reattempt-btn">
+                  Reattempt
+                </a>
+              </div>
+            </>
+          )}
         </div>
-
       </div>
     </section>
-  )
-}
+  );
+};
