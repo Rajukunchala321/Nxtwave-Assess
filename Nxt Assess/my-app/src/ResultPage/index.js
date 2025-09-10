@@ -1,9 +1,15 @@
 import React, { useContext } from "react";
 import "./index.css";
 import { Context } from "../Components/provider";
+import {Navigate} from 'react-router-dom';
+import Cookies from 'js-cookie'
 
 export const ResultPage = () => {
+  const jwtToken = Cookies.get('jwtToken');
   const { minutes, score, seconds } = useContext(Context);
+   if(!jwtToken){
+      return <Navigate to='/login' replace />
+     }
   return (
     <section className="result-section">
       <div className="result-main-container">
