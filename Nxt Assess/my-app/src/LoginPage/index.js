@@ -17,6 +17,8 @@ export const LoginForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     setError(null)
+    
+
 
     try {
       const username = nameInputRef.current.value;
