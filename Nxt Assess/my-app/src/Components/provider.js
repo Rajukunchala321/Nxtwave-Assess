@@ -1,7 +1,13 @@
-import React, {useCallback, createContext, useReducer, useEffect,useState, useRef } from "react";
+import React, {
+  useCallback,
+  createContext,
+  useReducer,
+  useEffect,
+  useState,
+  useRef,
+} from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
-
 
 const ApiInitalState = {
   loading: false,
@@ -48,39 +54,40 @@ function reducerTwo(state, action) {
 export const Context = createContext();
 
 const ContextProvider = ({ children }) => {
-
   const [apiState, dispatch] = useReducer(reducer, ApiInitalState);
   const [state, dispatchTwo] = useReducer(reducerTwo, InitalState);
 
-   const [minutes, setMinutes] = useState(9);
+  const [minutes, setMinutes] = useState(9);
   const [seconds, setSeconds] = useState(59);
   const [isActive, setIsActive] = useState(true);
   const timerRef = useRef();
   const jwtTokenRef = useRef();
-  const [score, setScore]= useState();
-  
-    // submit assigment
+  const [score, setScore] = useState();
 
-  const handleSubmit = useCallback(()=>{
+  // submit assigment
+
+  const handleSubmit = useCallback(() => {
     console.log("clikceds");
-     clearInterval(timerRef.current);
-      setIsActive(false); 
-      console.log(minutes, seconds);
-      // console.log(state);
-       console.log(apiState)
-     
+    clearInterval(timerRef.current);
+    setIsActive(false);
+    console.log(minutes, seconds);
+    // console.log(state);
+    console.log(apiState);
 
-  const  calulate = Object.entries(state.answered).reduce((acc, [qIndex, optId]) => {
-  const question = apiState.data.questions[qIndex];
-  const option = question?.options?.find(o => o.id === optId);
-  console.log(option?.is_correct)
-  if (option?.is_correct === 'true') {
-    acc++;
-  }
-  return acc;
-}, 0);
-  setScore(calulate)
-  }, [minutes,seconds, apiState, state.answered])
+    const calulate = Object.entries(state.answered).reduce(
+      (acc, [qIndex, optId]) => {
+        const question = apiState.data.questions[qIndex];
+        const option = question?.options?.find((o) => o.id === optId);
+        console.log(option?.is_correct);
+        if (option?.is_correct === "true") {
+          acc++;
+        }
+        return acc;
+      },
+      0
+    );
+    setScore(calulate);
+  }, [minutes, seconds, apiState, state.answered]);
 
   useEffect(() => {
     if (isActive) {
@@ -91,7 +98,7 @@ const ContextProvider = ({ children }) => {
           if (minutes === 0) {
             clearInterval(timerRef.current);
             setIsActive(false);
-            handleSubmit() 
+            handleSubmit();
           } else {
             setMinutes((prev) => prev - 1);
             setSeconds(59);
@@ -100,13 +107,11 @@ const ContextProvider = ({ children }) => {
       }, 1000);
     }
 
-    return () => clearInterval(timerRef.current); 
-  }, [isActive, minutes, seconds,handleSubmit]);
-
-
+    return () => clearInterval(timerRef.current);
+  }, [isActive, minutes, seconds, handleSubmit]);
 
   useEffect(() => {
-      jwtTokenRef.current = Cookies.get("jwtToken");
+    jwtTokenRef.current = Cookies.get("jwtToken");
     const fetchData = async () => {
       dispatch({ type: "FETCH_START" });
       try {
@@ -124,17 +129,22 @@ const ContextProvider = ({ children }) => {
       }
     };
     fetchData();
-
-    
   }, []);
 
-
-
-
-
-
   return (
-    <Context.Provider value={{isActive,handleSubmit,score, minutes, seconds, apiState, dispatch, state, dispatchTwo }}>
+    <Context.Provider
+      value={{
+        isActive,
+        handleSubmit,
+        score,
+        minutes,
+        seconds,
+        apiState,
+        dispatch,
+        state,
+        dispatchTwo,
+      }}
+    >
       {children}
     </Context.Provider>
   );

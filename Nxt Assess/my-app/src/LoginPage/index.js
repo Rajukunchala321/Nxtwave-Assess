@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import "./index.css";
 import axios from "axios";
 import Cookies from "js-cookie";
-import {useNavigate} from 'react-router-dom'
+import {Navigate, useNavigate} from 'react-router-dom'
 
 
 export const LoginForm = () => {
@@ -13,9 +13,6 @@ export const LoginForm = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(()=>{
-     nameInputRef.current.focus();
-  },[])
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -30,18 +27,24 @@ export const LoginForm = () => {
         JSON.stringify(userDetails)
       );
 
-      setJwtToken(response.data.jwt_token);
-      Cookies.set("jwtToken", jwtToken, {
+      
+      const token =response.data.jwt_token;
+      setJwtToken(token);
+      Cookies.set("jwtToken", token, {
         expires:30,
         path:'/'
       });
-     navigate("/", {replace:'true'})
+     navigate("/", {replace:true})
+     
     } catch (err) {
      const error = err?.response?.data?.error_msg || "Login failed!";
+     console.log(error)
       setError(error);
-     navigate('/', {replace:'true'})
     }
   };
+  if(jwtToken || Cookies.get("jwtToken")){
+    return <Navigate to='/' replace />
+  }
 
   return (
     <section className="form-section">

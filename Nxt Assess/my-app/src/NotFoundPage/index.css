@@ -1,0 +1,20 @@
+.not-found{
+    max-width: 480px;
+
+
+}
+.not-found-main-container{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100svh;
+    padding-top: 120px;
+}
+.not-found-main-container>div{
+    color: black;
+    font-size: 32px;
+}
