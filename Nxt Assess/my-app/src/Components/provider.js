@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useState,
   useRef,
+  useMemo
 } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -67,18 +68,17 @@ const ContextProvider = ({ children }) => {
   // submit assigment
 
   const handleSubmit = useCallback(() => {
-    console.log("clikceds");
+    
     clearInterval(timerRef.current);
     setIsActive(false);
-    console.log(minutes, seconds);
-    // console.log(state);
-    console.log(apiState);
+   
+    
 
     const calulate = Object.entries(state.answered).reduce(
       (acc, [qIndex, optId]) => {
         const question = apiState.data.questions[qIndex];
         const option = question?.options?.find((o) => o.id === optId);
-        console.log(option?.is_correct);
+       
         if (option?.is_correct === "true") {
           acc++;
         }
@@ -87,7 +87,7 @@ const ContextProvider = ({ children }) => {
       0
     );
     setScore(calulate);
-  }, [minutes, seconds, apiState, state.answered]);
+  }, [ apiState, state.answered]);
 
   useEffect(() => {
     if (isActive) {
@@ -130,11 +130,7 @@ const ContextProvider = ({ children }) => {
     };
     fetchData();
   }, []);
-
-  return (
-    <Context.Provider
-      value={{
-        isActive,
+  const value = useMemo(()=>({isActive,
         handleSubmit,
         score,
         minutes,
@@ -142,8 +138,11 @@ const ContextProvider = ({ children }) => {
         apiState,
         dispatch,
         state,
-        dispatchTwo,
-      }}
+        dispatchTwo}),[apiState, state, handleSubmit,score, seconds, minutes,isActive])
+
+  return (
+    <Context.Provider
+      value={value}
     >
       {children}
     </Context.Provider>

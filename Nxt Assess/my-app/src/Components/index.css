@@ -1,5 +1,7 @@
 
-
+.errorMsg{
+    color: red;
+}
 .question-num-container>div.submited{
     border: 1px solid #7C599F !important;
     background-color: #7C599F26 !important;

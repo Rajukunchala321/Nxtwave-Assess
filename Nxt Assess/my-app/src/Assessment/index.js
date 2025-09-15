@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import "./index.css";
 import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
@@ -12,6 +12,23 @@ export const Assessment = () => {
   const { dispatchTwo, state } = useContext(Context);
   const jwtToken = Cookies.get("jwtToken");
   const [errMsg, setErrMsg] = useState("");
+   useEffect(() => {
+    // Push current state to history so back won't leave
+    window.history.pushState(null, "", window.location.href);
+
+    const handlePopState = () => {
+      // Push state again to prevent going back
+      window.history.pushState(null, "", window.location.href);
+      alert("You cannot go back during the assessment!");
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
+
 
   const hanleOptId = (id) => {
     setOptId(id);
@@ -41,11 +58,14 @@ export const Assessment = () => {
     } else {
       setErrMsg("*Please select an option before continuing.");
     }
+   
   };
+  
 
   if (!jwtToken) {
     return <Navigate to="/login" replace />;
   }
+
   return (
     <section className="assessment-section">
       <div className="assessment-main-container">

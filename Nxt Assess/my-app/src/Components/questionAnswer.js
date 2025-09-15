@@ -1,13 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext,  useState, useEffect } from "react";
 import "./index.css";
 import { Context } from "./provider";
 const QuestionAnswer = ({ hanleOptId }) => {
   const { apiState, state } = useContext(Context);
   const [selectOption, setSelectOption] = useState(null);
+  
 
   const questions = apiState.data.questions;
 
   const question = questions?.[state.currentQuestion];
+   useEffect(()=>{
+     const answeredId = state.answered[state.currentQuestion];
+     setSelectOption(answeredId || null);
+  },[state.currentQuestion, state.answered])
 
   const handleSelectOpt = (id) => {
     setSelectOption(id);
@@ -17,7 +22,8 @@ const QuestionAnswer = ({ hanleOptId }) => {
   if (!question) {
     return <div>Loading pls wait....</div>;
   }
-
+  
+ 
   return (
     <div>
       <h2>{question.question_text}</h2>
@@ -30,12 +36,8 @@ const QuestionAnswer = ({ hanleOptId }) => {
                 id={option.id}
                 value={option.is_correct}
                 className={`default-option ${
-                  selectOption === option.id ? "selected" : ""
-                } ${
-                  Object.values(state.answered).includes(option.id)
-                    ? "selected"
-                    : ""
-                }`}
+                  selectOption === option.id  ? "selected" : ""
+                } `}
                 onClick={() => handleSelectOpt(option.id)}
               >
                 {option.text}
@@ -52,11 +54,7 @@ const QuestionAnswer = ({ hanleOptId }) => {
                 value={option.is_correct}
                 className={`option-img ${
                   selectOption === option.id ? "selected" : ""
-                } ${
-                  Object.values(state.answered).includes(option.id)
-                    ? "selected"
-                    : ""
-                }`}
+                } `}
                 src={option.image_url}
                 alt={`option-img-${option.id}`}
                 onClick={() => handleSelectOpt(option.id)}

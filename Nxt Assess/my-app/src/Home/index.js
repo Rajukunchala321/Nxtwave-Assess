@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 import Cookies from 'js-cookie';
-import { Navigate } from "react-router-dom";
+import { Navigate,Link  } from "react-router-dom";
 
 export const Home = () => {
   const jwtToken = Cookies.get('jwtToken');
@@ -10,6 +10,7 @@ export const Home = () => {
      if(!jwtToken){
       return <Navigate to='/login' replace />
      }
+     
   return (
     <section>
       <div className="home-main-container">
@@ -34,7 +35,7 @@ export const Home = () => {
                 assessment
               </li>
             </ol>
-            <a href="/assessment">Start Assessment</a>
+            <Link  to="/assessment">Start Assessment</Link >
          
           </div>
          <img src="../home-img.png" alt='' />

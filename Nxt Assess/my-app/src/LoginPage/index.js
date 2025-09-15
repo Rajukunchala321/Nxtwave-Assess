@@ -26,7 +26,9 @@ export const LoginForm = () => {
       const userDetails = { username, password };
       const response = await axios.post(
         "https://apis.ccbp.in/login",
-        JSON.stringify(userDetails)
+        userDetails,{
+          headers: { "Content-Type": "application/json" }
+        }
       );
 
       

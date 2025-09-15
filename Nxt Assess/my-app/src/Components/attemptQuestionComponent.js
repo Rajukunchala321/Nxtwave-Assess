@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const AttemptQuestionComponent = () => {
   const {apiState, state, dispatchTwo, handleSubmit}= useContext(Context);
+ 
   
   const navigate = useNavigate()
   const answeredCount =  Object.keys(state.answered).length
@@ -44,7 +45,11 @@ export const AttemptQuestionComponent = () => {
               )}
           </div>
         </div>
-        <button onClick={submitAndNavigate} className='submit-btn'>Submit Assessment</button>
+        <div>
+         
+            <button onClick={submitAndNavigate} className='submit-btn'>Submit Assessment</button>
+
+        </div>
         </div>
     </div>
   )
